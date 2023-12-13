@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMLA80</title>
+    <style>
+        /* Estilos existentes */
+
+        /* Bloque 1 - Naranja Suave */
+        #block1 {
+            background-color: #FFD700;
+            color: black;
+        }
+
+        /* Bloque 2 - Mostaza */
+        #block2 {
+            background-color: #FFDB58;
+            color: black;
+        }
+
+        /* Bloque 3 - Rosa */
+        #block3 {
+            background-color: #FFC0CB;
+            color: black;
+        }
+
+        /* Bloque 4 - Verde Oscuro */
+        #block4 {
+            background-color: #006400;
+            color: white;
+        }
+
+        /* Bloque 5 - Naranja Claro */
+        #block5 {
+            background-color: #FFA07A;
+            color: black;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+</head>
+<body>
+
+    <div id="container">
+
+        <script>
+            // Función para decidir al azar entre las dos dinámicas
+            function decideDynamic() {
+                var random = Math.random();
+                if (random < 0.5) {
+                    showBlockSorting(); // Mostrar dinámica de ordenar bloques
+                } else {
+                    showTextSorting(); // Mostrar dinámica de texto
+                }
+            }
+
+            // Función para mostrar la dinámica de ordenar bloques
+            function showBlockSorting() {
+                var blocks = $(".sortable");
+                for (var i = blocks.length; i > 0; i--) {
+                    var j = Math.floor(Math.random() * i);
+                    blocks.parent().append(blocks.splice(j, 1));
+                }
+                document.getElementById("blockSorting").style.display = "block";
+            }
+
+            // Función para mostrar la dinámica de texto
+            function showTextSorting() {
+                document.getElementById("textSorting").style.display = "block";
+            }
+
+            // Resto del código existente...
+        </script>
+
+        <div id="blockSorting" style="display: none;">
+            <h1>Arrange the following blocks into the ideal order.</h1>
+            <div id="sortableContainer">
+                <div class="sortable" id="block1">One sacrifice of chasing the American Dream is family separation.</div>
+                <div class="sortable" id="block2">In author Reyna Grande’s book, The Distance Between Us, Don Bartolo promises.</div>
+                <div class="sortable" id="block3">“Don't ever think that your parents don't love you, it is because they love you very much that they have left” (Grande 16).</div>
+                <div class="sortable" id="block4">The children were feeling abandoned by their parents and therefore felt unloved.</div>
+                <div class="sortable" id="block5">Through Don Bartolo, however, Grande shows that family separation is motivated by a need for a better life: a chance at the American Dream.</div>
+            </div>
+            <button type="button" onclick="verifyOrder()">Verify</button>
+        </div>
+
+        <div id="textSorting" style="display: none;">
+            <!-- Aquí puedes agregar la estructura para la dinámica de ordenar texto -->
+        </div>
+
+        <script>
+            // Resto del código existente...
+        </script>
+
+    </div>
+
+</body>
+</html>
+
+
