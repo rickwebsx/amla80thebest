@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMLA80</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #4CAF50; /* Fondo verde */
+            font-family: 'Arial', sans-serif; /* Cambia la fuente si lo deseas */
+            color: #000; /* Cambia el color del texto a negro */
+        }
+
+        #container {
+            text-align: center;
+        }
+
+        /* Estilo para ocultar los bloques después de la verificación */
+        #blockSorting, #blockSortingNew, #welcomeMessage, #errorMessage {
+            display: none;
+        }
+
+        .sortable {
+            cursor: move;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px; /* Agrega bordes redondeados a los bloques */
+        }
+
+        .sortable-orange {
+            background-color: #FFD700; /* Naranja suave */
+            color: #000;
+        }
+
+        .sortable-mustard {
+            background-color: #FFDB58; /* Mostaza */
+            color: #000;
+        }
+
+        .sortable-pink {
+            background-color: #FFC0CB; /* Rosa */
+            color: #000;
+        }
+
+        .sortable-dark-green {
+            background-color: #006400; /* Verde oscuro */
+            color: #FFF;
+        }
+
+        .sortable-light-orange {
+            background-color: #FFA07A; /* Naranja claro */
+            color: #000;
+        }
+
+        .sortable-cafe {
+            background-color: #8B4513; /* Café */
+            color: #FFF;
+        }
+
+        button {
+            background-color: #4CAF50; /* Cambia el color de fondo del botón */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px; /* Agrega bordes redondeados al botón */
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049; /* Cambia el color de fondo del botón al pasar el ratón */
+        }
+
+        /* Agregamos un estilo para el botón de retroceso */
+        #backButton {
+            background-color: #008CBA; /* Color de fondo azul */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px; /* Bordes redondeados */
+            cursor: pointer;
+        }
+
+        #backButton:hover {
+            background-color: #00587a; /* Cambia el color de fondo al pasar el ratón */
+        }
+    </style>
+    <!-- Agregar la referencia a jQuery y jQuery UI -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+</head>
+<body>
+
+    <div id="container">
+        <div id="blockSorting">
+            <h1>Arrange the following blocks into the ideal date format of an MLA 2.0 document.</h1>
+            <div id="sortableContainer">
+                <div class="sortable" id="block1">Amla Student</div>
+                <div class="sortable" id="block2">Professor Casian</div>
+                <div class="sortable" id="block3">AMLA 80</div>
+                <div class="sortable" id="block4">13 December 2023</div>
+            </div>
+            <button type="button" onclick="verifyOrder()">Verify</button>
+        </div>
+
+        <div id="blockSortingNew">
+            <h1>Arrange the following blocks into the correct order.</h1>
+            <div id="sortableContainerNew">
+                <div class="sortable sortable-cafe" id="blockNew1">One sacrifice of chasing the American Dream is family separation.</div>
+                <div class="sortable sortable-mustard" id="blockNew2">In author Reyna Grande’s book, The Distance Between Us, Don Bartolo promises,</div>
+                <div class="sortable sortable-pink" id="blockNew3">“Don't ever think that your parents don't love you, it is because they love you very much that they have left” (Grande 16).</div>
+                <div class="sortable sortable-dark-green" id="blockNew4">The children were feeling abandoned by their parents and therefore felt unloved.</div>
+                <div class="sortable sortable-cafe" id="blockNew5">Through Don Bartolo, however, Grande shows that family separation is motivated by a need for a better life: a chance at the American Dream.</div>
+            </div>
+            <button type="button" onclick="verifyOrderNew()">Verify</button>
+        </div>
+
+        <div id="welcomeMessage">
+            <h1>¡Good Job!</h1>
+            <p>Wow! You are on the next level; nevertheless, I recommend you take AMLA 80. You'll have a lot of fun, or I'll leave you with a slightly more challenging option.</p>
+            <button id="backButton" onclick="goBack()">Return</button>
+            <button id="challengeButton" onclick="redirectToChallenge()">Ready to Accept the Challenge?</button>
+        </div>
+
+        <div id="errorMessage">
+            <h1>Oh no...</h1>
+            <p>I'm sure you gave your best, but it's time to take your skills to the next level!</p>
+            <button id="backButton" onclick="goBack()">Return</button>
+            <button id="challengeButton" onclick="redirectToChallenge()">Ready to Accept the Challenge?</button>
+        </div>
+    </div>
+
+    <script>
+        // Función para desordenar aleatoriamente los bloques
+        function shuffleBlocks(containerId) {
+            var blocks = $("#" + containerId + " .sortable");
+            for (var i = blocks.length; i > 0; i--) {
+                var j = Math.floor(Math.random() * i);
+                blocks.parent().append(blocks.splice(j, 1));
+            }
+        }
+
+        // Función para mostrar una actividad aleatoria al cargar la página
+        function showRandomActivity() {
+            var randomNumber = Math.random();
+            if (randomNumber < 0.5) {
+                // Mostrar la actividad original
+                document.getElementById("blockSorting").style.display = "block";
+                document.getElementById("blockSortingNew").style.display = "none";
+            } else {
+                // Mostrar la nueva actividad
+                document.getElementById("blockSorting").style.display = "none";
+                document.getElementById("blockSortingNew").style.display = "block";
+                // Desordenar los bloques y agregarlos nuevamente al contenedor de la nueva actividad
+                shuffleBlocks("sortableContainerNew");
+            }
+        }
+
+        // Función para volver al sorteo de bloques
+        function goBack() {
+            showRandomActivity();
+            document.getElementById("welcomeMessage").style.display = "none";
+            document.getElementById("errorMessage").style.display = "none";
+        }
+
+        // Inicializar la funcionalidad de ordenar con la biblioteca jQuery UI
+        $(function () {
+            // Mostrar una actividad aleatoria al cargar la página
+            showRandomActivity();
+            
+            // Inicializar la funcionalidad de ordenar con la biblioteca jQuery UI para ambas actividades
+            $("#sortableContainer, #sortableContainerNew").sortable();
+        });
+
+        function verifyOrder() {
+            // Obtener el orden actual de los bloques de la actividad original
+            var order = $("#sortableContainer").sortable("toArray");
+
+            // Verificar si los bloques están en el orden correcto
+            if (isOrderCorrect(order)) {
+                // Ocultar los bloques y mostrar el mensaje de bienvenida
+                document.getElementById("blockSorting").style.display = "none";
+                document.getElementById("welcomeMessage").style.display = "block";
+            } else {
+                // Ocultar los bloques y mostrar el mensaje de error
+                document.getElementById("blockSorting").style.display = "none";
+                document.getElementById("errorMessage").style.display = "block";
+            }
+        }
+
+        function isOrderCorrect(order) {
+            // Verificar si los bloques están en el orden correcto
+            return (
+                order.indexOf("block1") < order.indexOf("block2") &&
+                order.indexOf("block2") < order.indexOf("block3") &&
+                order.indexOf("block3") < order.indexOf("block4")
+            );
+        }
+
+        function verifyOrderNew() {
+            // Obtener el orden actual de los bloques de la nueva actividad
+            var order = $("#sortableContainerNew").sortable("toArray");
+
+            // Verificar si los bloques están en el orden correcto
+            if (isOrderCorrectNew(order)) {
+                // Ocultar los bloques y mostrar el mensaje de bienvenida
+                document.getElementById("blockSortingNew").style.display = "none";
+                document.getElementById("welcomeMessage").style.display = "block";
+            } else {
+                // Ocultar los bloques y mostrar el mensaje de error
+                document.getElementById("blockSortingNew").style.display = "none";
+                document.getElementById("errorMessage").style.display = "block";
+            }
+        }
+
+        function isOrderCorrectNew(order) {
+            // Verificar si los bloques están en el orden correcto
+            return (
+                order.indexOf("blockNew1") < order.indexOf("blockNew2") &&
+                order.indexOf("blockNew2") < order.indexOf("blockNew3") &&
+                order.indexOf("blockNew3") < order.indexOf("blockNew4") &&
+                order.indexOf("blockNew4") < order.indexOf("blockNew5")
+            );
+        }
+
+        // Función para redirigir al usuario al enlace del desafío
+        function redirectToChallenge() {
+            window.location.href = "https://www.mtsac.edu/amla/courses-writing.html";
+        }
+    </script>
+
+</body>
+</html>
