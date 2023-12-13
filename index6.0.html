@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ... (código existente) ... -->
+</head>
+<body>
+
+    <div id="container">
+        <div id="blockSorting">
+            <!-- ... (código existente) ... -->
+        </div>
+
+        <div id="welcomeMessage">
+            <h1>¡Good Job!</h1>
+            <p>Wow! You are on the next level; nevertheless, I recommend you take AMLA 80. You'll have a lot of fun, or I'll leave you with a slightly more challenging option.</p>
+            <button id="backButton" onclick="goBack()">Return</button>
+            <button id="challengeButton" onclick="redirectToChallenge()">Ready to Accept the Challenge?</button>
+        </div>
+
+        <div id="errorMessage">
+            <h1>Oh no...</h1>
+            <p>I'm sure you gave your best, but it's time to take your skills to the next level!</p>
+            <button id="backButton" onclick="goBack()">Return</button>
+            <button id="challengeButton" onclick="redirectToChallenge()">Ready to Accept the Challenge?</button>
+        </div>
+    </div>
+
+    <script>
+        // ... (código existente) ...
+
+        // Función para redirigir al usuario al enlace del desafío
+        function redirectToChallenge() {
+            window.location.href = "https://www.mtsac.edu/amla/courses-writing.html";
+        }
+    </script>
+
+</body>
+</html>
+
